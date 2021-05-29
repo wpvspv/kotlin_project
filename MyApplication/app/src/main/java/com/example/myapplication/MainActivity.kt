@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.myapplication.databinding.ActivityMainBinding
+import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 import retrofit2.Call
@@ -42,6 +43,12 @@ class MainActivity : AppCompatActivity() {
 
         val mapView = MapView(this)
         binding.mapContainer.addView(mapView)
+        mapView.setZoomLevel(7,true) //줌레벨
+        var marker = MapPOIItem() //마커 이벤트
+
+        //mapView.setMapViewEventListener(this)
+        mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading)
+        mapView.setShowCurrentLocationMarker(true)
 
         //검색 눌렀을 때
         binding.searchBtn.setOnClickListener{
@@ -84,6 +91,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
 
     //키워드 검색 함수
     private fun searchKeyword(keyword: String) {
